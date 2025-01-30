@@ -24,6 +24,9 @@ builder.Services.AddDbContext<TasklyContext>(options =>
         }
     ));
 
+
+builder.Services.AddScoped<ITaskService, TaskService>();
+
 // Configure Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
