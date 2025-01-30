@@ -63,3 +63,8 @@ packages/
 # Arquivos do sistema operacional
 .DS_Store
 Thumbs.db
+
+# SQLite arquivos de banco de dados
+*.db
+*.db-shm
+*.db-wal
