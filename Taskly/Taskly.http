@@ -1,0 +1,6 @@
+@Taskly_HostAddress = http://localhost:5082
+
+GET {{Taskly_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
