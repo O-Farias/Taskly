@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Taskly.Data;
 using Taskly.Services;
+using Taskly.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,9 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+// middleware pipeline
+app.UseErrorHandling();
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
