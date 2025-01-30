@@ -12,6 +12,8 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.WriteIndented = true;
 });
 
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
 // Configure DbContext for SQLite
 builder.Services.AddDbContext<TasklyContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
