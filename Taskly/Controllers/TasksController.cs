@@ -1,6 +1,7 @@
+// Controllers/TasksController.cs
 using Microsoft.AspNetCore.Mvc;
+using Taskly.DTOs;
 using Taskly.Services;
-using Taskly.Models;
 
 namespace Taskly.Controllers
 {
@@ -18,7 +19,7 @@ namespace Taskly.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<TodoTask>>> GetTasks()
+        public async Task<ActionResult<IEnumerable<TaskDto>>> GetTasks()
         {
             var tasks = await _taskService.GetAllTasksAsync();
             return Ok(tasks);
@@ -27,7 +28,7 @@ namespace Taskly.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<TodoTask>> GetTask(int id)
+        public async Task<ActionResult<TaskDto>> GetTask(int id)
         {
             try
             {
@@ -43,11 +44,11 @@ namespace Taskly.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<TodoTask>> CreateTask(TodoTask task)
+        public async Task<ActionResult<TaskDto>> CreateTask(CreateTaskDto taskDto)
         {
             try
             {
-                var createdTask = await _taskService.CreateTaskAsync(task);
+                var createdTask = await _taskService.CreateTaskAsync(taskDto);
                 return CreatedAtAction(nameof(GetTask), new { id = createdTask.Id }, createdTask);
             }
             catch (ArgumentException ex)
@@ -60,11 +61,11 @@ namespace Taskly.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateTask(int id, TodoTask task)
+        public async Task<IActionResult> UpdateTask(int id, UpdateTaskDto taskDto)
         {
             try
             {
-                await _taskService.UpdateTaskAsync(id, task);
+                await _taskService.UpdateTaskAsync(id, taskDto);
                 return NoContent();
             }
             catch (KeyNotFoundException)
