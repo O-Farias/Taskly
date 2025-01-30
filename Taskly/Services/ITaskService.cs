@@ -4,10 +4,10 @@ namespace Taskly.Services
 {
     public interface ITaskService
     {
-        Task<IEnumerable<Task>> GetAllTasksAsync();
-        Task<Task> GetTaskByIdAsync(int id);
-        Task<Task> CreateTaskAsync(Task task);
-        Task<Task> UpdateTaskAsync(int id, Task task);
+        Task<IEnumerable<TodoTask>> GetAllTasksAsync();
+        Task<TodoTask> GetTaskByIdAsync(int id);
+        Task<TodoTask> CreateTaskAsync(TodoTask task);
+        Task<TodoTask> UpdateTaskAsync(int id, TodoTask task);
         Task DeleteTaskAsync(int id);
     }
 }
