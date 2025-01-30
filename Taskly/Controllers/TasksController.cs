@@ -1,4 +1,3 @@
-// Controllers/TasksController.cs
 using Microsoft.AspNetCore.Mvc;
 using Taskly.DTOs;
 using Taskly.Services;
@@ -30,15 +29,8 @@ namespace Taskly.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<TaskDto>> GetTask(int id)
         {
-            try
-            {
-                var task = await _taskService.GetTaskByIdAsync(id);
-                return Ok(task);
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
+            var task = await _taskService.GetTaskByIdAsync(id);
+            return Ok(task);
         }
 
         [HttpPost]
@@ -46,15 +38,8 @@ namespace Taskly.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<TaskDto>> CreateTask(CreateTaskDto taskDto)
         {
-            try
-            {
-                var createdTask = await _taskService.CreateTaskAsync(taskDto);
-                return CreatedAtAction(nameof(GetTask), new { id = createdTask.Id }, createdTask);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var createdTask = await _taskService.CreateTaskAsync(taskDto);
+            return CreatedAtAction(nameof(GetTask), new { id = createdTask.Id }, createdTask);
         }
 
         [HttpPut("{id}")]
@@ -63,19 +48,8 @@ namespace Taskly.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateTask(int id, UpdateTaskDto taskDto)
         {
-            try
-            {
-                await _taskService.UpdateTaskAsync(id, taskDto);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
-            catch (ArgumentException)
-            {
-                return BadRequest();
-            }
+            await _taskService.UpdateTaskAsync(id, taskDto);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
@@ -83,15 +57,8 @@ namespace Taskly.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            try
-            {
-                await _taskService.DeleteTaskAsync(id);
-                return NoContent();
-            }
-            catch (KeyNotFoundException)
-            {
-                return NotFound();
-            }
+            await _taskService.DeleteTaskAsync(id);
+            return NoContent();
         }
     }
 }
