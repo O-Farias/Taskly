@@ -1,13 +1,13 @@
-using Taskly.Models;
+using Taskly.DTOs;
 
 namespace Taskly.Services
 {
     public interface ITaskService
     {
-        Task<IEnumerable<TodoTask>> GetAllTasksAsync();
-        Task<TodoTask> GetTaskByIdAsync(int id);
-        Task<TodoTask> CreateTaskAsync(TodoTask task);
-        Task<TodoTask> UpdateTaskAsync(int id, TodoTask task);
+        Task<IEnumerable<TaskDto>> GetAllTasksAsync();
+        Task<TaskDto> GetTaskByIdAsync(int id);
+        Task<TaskDto> CreateTaskAsync(CreateTaskDto taskDto);
+        Task<TaskDto> UpdateTaskAsync(int id, UpdateTaskDto taskDto);
         Task DeleteTaskAsync(int id);
     }
 }
