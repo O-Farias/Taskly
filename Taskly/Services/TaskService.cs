@@ -13,14 +13,14 @@ namespace Taskly.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Task>> GetAllTasksAsync()
+        public async Task<IEnumerable<TodoTask>> GetAllTasksAsync()
         {
             return await _context.Tasks
                 .OrderByDescending(t => t.CreatedAt)
                 .ToListAsync();
         }
 
-        public async Task<Task> GetTaskByIdAsync(int id)
+        public async Task<TodoTask> GetTaskByIdAsync(int id)
         {
             var task = await _context.Tasks.FindAsync(id);
             if (task == null)
@@ -29,7 +29,7 @@ namespace Taskly.Services
             return task;
         }
 
-        public async Task<Task> CreateTaskAsync(Task task)
+        public async Task<TodoTask> CreateTaskAsync(TodoTask task)
         {
             if (string.IsNullOrEmpty(task.Title))
                 throw new ArgumentException("O título da tarefa é obrigatório.");
@@ -42,7 +42,7 @@ namespace Taskly.Services
             return task;
         }
 
-        public async Task<Task> UpdateTaskAsync(int id, Task task)
+        public async Task<TodoTask> UpdateTaskAsync(int id, TodoTask task)
         {
             if (id != task.Id)
                 throw new ArgumentException("IDs não correspondem.");
