@@ -18,7 +18,7 @@ namespace Taskly.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<IEnumerable<Task>>> GetTasks()
+        public async Task<ActionResult<IEnumerable<TodoTask>>> GetTasks()
         {
             var tasks = await _taskService.GetAllTasksAsync();
             return Ok(tasks);
@@ -27,7 +27,7 @@ namespace Taskly.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Task>> GetTask(int id)
+        public async Task<ActionResult<TodoTask>> GetTask(int id)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace Taskly.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Task>> CreateTask(Task task)
+        public async Task<ActionResult<TodoTask>> CreateTask(TodoTask task)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace Taskly.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateTask(int id, Task task)
+        public async Task<IActionResult> UpdateTask(int id, TodoTask task)
         {
             try
             {
