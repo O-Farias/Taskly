@@ -9,6 +9,6 @@ namespace Taskly.Data
         {
         }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<TodoTask> Tasks { get; set; }
     }
 }
